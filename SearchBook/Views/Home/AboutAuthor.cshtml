@@ -1,0 +1,30 @@
+﻿@* Display an author information. *@
+@model SearchBook.Models.AuthorViewModel
+
+@{
+    ViewBag.Title = "About Author";
+}
+
+<h2>About Author</h2>
+<div>
+    <h3>Author Name: @Model.AuthorName</h3>
+    <h4>Average: @Model.AverageRate</h4>
+    <h4>Top Ten books</h4>
+    <table class="table">
+        <tr>
+            <td>Book Title</td>
+            <td> Rating</td>
+        </tr>
+        @foreach( var bk in Model.TopTenBooks )
+        {
+            <tr>
+            <td>@bk.title</td>
+            <td>@bk.average_rating</td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+

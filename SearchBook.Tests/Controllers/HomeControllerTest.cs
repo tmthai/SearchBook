@@ -6,48 +6,54 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SearchBook;
 using SearchBook.Controllers;
+using SearchBook.Models;
 
 namespace SearchBook.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
+        HomeController controller = new HomeController();
+
         [TestMethod]
         public void Index()
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
             ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
-        public void About()
+        public void SearchForAuthorTest()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            /*TEST 1: Non-existing Value: example: abc */
+            ViewResult result = controller.SearchForAuthor("abc") as ViewResult;
 
-            // Act
-            ViewResult result = controller.About() as ViewResult;
+            var model = (AuthorSearchModel)result.ViewData.Model;
 
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            Assert.AreEqual("abc", model.authorNameSearch);
+            Assert.AreEqual(0, model.authorsList.Count);
+        }
+
+        [TestMethod]
+        public void SearchForAuthorTest_Null()
+        {
+
+            /*TEST 2: Null Value */
+            ViewResult resultNull = controller.SearchForAuthor("NULL") as ViewResult;
+
+            var modelNull = (AuthorSearchModel)resultNull.ViewData.Model;
+
+            Assert.AreEqual("NULL", modelNull.authorNameSearch);
+            Assert.AreEqual(0, modelNull.authorsList.Count);
+
         }
 
         [TestMethod]
         public void Contact()
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
+          
             ViewResult result = controller.Contact() as ViewResult;
 
-            // Assert
             Assert.IsNotNull(result);
         }
     }

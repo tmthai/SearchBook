@@ -1,0 +1,41 @@
+﻿@* Display information about a book. *@
+
+@model SearchBook.Models.Book
+
+@{
+    ViewBag.Title = "ABook";
+}
+
+<h2>Book Page</h2>
+
+<div class="container">
+
+    <div class="row">
+        <img src="https://placehold.it/150x80?text=IMAGE" class="img-thumbnail" alt="Cinque Terre">
+    </div>
+
+    <div class="row">
+        <h4>@Model.title</h4>
+    </div>
+
+    <div class="row">Author: @Model.authors</div>
+    <div class="row">
+        <div class="col-sm-4"> Average ratings: @Model.average_rating</div>
+        <div class="col-sm-4">ISBN: @Model.isbn</div>
+        <div class="col-sm-4"> ISBN13: @Model.isbn13</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            Language: @Model.language_code
+        </div>
+        <div class="col-sm-4">
+            Number Pages: @Model.number_pages
+        </div>
+        <div class="col-sm-4">
+            Rating count: @Model.ratings_count
+        </div>
+    </div>
+
+</div>
+
+

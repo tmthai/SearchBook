@@ -6,8 +6,18 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @*add our custom css *@
+    @Styles.Render("~/Content/appcss.css")
 </head>
 <body>
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1> Renting Book Online</h1>
+            <p> Time for living and reading</p>
+        </div>
+    </div>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -16,12 +26,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Renting Books", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Author Search", "SearchForAuthor", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
             </div>
@@ -29,6 +39,10 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+ 
+        @*Button links to go back home*@
+        <div class="modal-footer"> @Html.ActionLink("Back Home", "Index") | @Html.ActionLink("Back To Search Author", "SearchForAuthor")</div>
+
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

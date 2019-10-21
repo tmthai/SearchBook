@@ -1,0 +1,61 @@
+﻿@* Display Author Search feature information. *@
+
+@model SearchBook.Models.AuthorSearchModel
+
+@{
+    ViewBag.Title = "SearchForAuthor";
+}
+
+<h2>Search For Author</h2>
+
+@* Check the empty space for txtNameSearch.
+   If txtNameSearch is empty then not submit the form *@
+<script>
+    function ErrorHandling() {
+        const txtNameSearch = document.getElementById("txtNameSearch");
+        if (txtNameSearch.value.trim() == "")
+        {
+            alert("Please input an author name!");
+            return false;
+        }
+        return true;    
+    }
+</script>
+
+@* Search Form *@
+<div>
+    <form action="SearchForAuthor" method="post" onsubmit="return ErrorHandling()">
+        <table>
+            <tr>
+                <td>
+                    Author Name: <input id="txtNameSearch" required type="text" name="txtNameSearch" />
+                </td>
+                <td>
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+@* Displaying Search Result *@
+<div>
+    @if (@Model.authorNameSearch == null || @Model.authorNameSearch.IsEmpty())
+    {
+        <h5> Search Result will display here</h5>
+    }
+    else
+    if (@Model.authorsList.Count() == 0)
+    {
+        <h5> We couldn't find any @Model.authorNameSearch in our list. </h5>
+    }
+    else
+    {
+        <h5> Search Result: </h5>
+        foreach (var au in Model.authorsList)
+        {
+            <!-- Display author names with link to each author page -->
+            <h6> @Html.ActionLink(@au.ToString(),"AboutAuthor", new { authorName = @au.ToString()})</h6>
+        }
+     }
+</div>
